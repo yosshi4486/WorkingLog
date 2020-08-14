@@ -3,12 +3,17 @@
    version = "3.0">
    <TimelineItems>
       <LoggerValueHistoryTimelineItem
-         documentLocation = "file:///Users/yamadayoshiharu/Documents/Projects/WorkingLog/2020:08:14.playground#CharacterRangeLen=13&amp;CharacterRangeLoc=522&amp;EndingColumnNumber=0&amp;EndingLineNumber=18&amp;StartingColumnNumber=1&amp;StartingLineNumber=17&amp;Timestamp=619065759.755855"
+         documentLocation = "file:///Users/yamadayoshiharu/Documents/Projects/WorkingLog/2020:08:14.playground#CharacterRangeLen=13&amp;CharacterRangeLoc=522&amp;EndingColumnNumber=0&amp;EndingLineNumber=18&amp;StartingColumnNumber=1&amp;StartingLineNumber=17&amp;Timestamp=619101881.126019"
          selectedRepresentationIndex = "0"
          shouldTrackSuperviewWidth = "NO">
       </LoggerValueHistoryTimelineItem>
       <LoggerValueHistoryTimelineItem
-         documentLocation = "file:///Users/yamadayoshiharu/Documents/Projects/WorkingLog/2020:08:14.playground#CharacterRangeLen=11&amp;CharacterRangeLoc=747&amp;EndingColumnNumber=16&amp;EndingLineNumber=26&amp;StartingColumnNumber=5&amp;StartingLineNumber=26&amp;Timestamp=619065759.755939"
+         documentLocation = "file:///Users/yamadayoshiharu/Documents/Projects/WorkingLog/2020:08:14.playground#CharacterRangeLen=11&amp;CharacterRangeLoc=747&amp;EndingColumnNumber=16&amp;EndingLineNumber=26&amp;StartingColumnNumber=5&amp;StartingLineNumber=26&amp;Timestamp=619101881.1261081"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/yamadayoshiharu/Documents/Projects/WorkingLog/2020:08:14.playground#CharacterRangeLen=15&amp;CharacterRangeLoc=1610&amp;EndingColumnNumber=29&amp;EndingLineNumber=44&amp;StartingColumnNumber=14&amp;StartingLineNumber=44&amp;Timestamp=619101881.126174"
          selectedRepresentationIndex = "0"
          shouldTrackSuperviewWidth = "NO">
       </LoggerValueHistoryTimelineItem>
