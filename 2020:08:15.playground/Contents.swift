@@ -34,4 +34,22 @@ struct TreeView {
  ・Outline表示をやるときは、NSDiffableDataSourceSectionSnapshotでsnapshot.append(items, to: parent)をやっているので、このメソッドが親子関係の構築において大きな役割を果たしていそう。
  
  ・自前実装頑張るなら、UITableViewDiffableDataSourceでNSDiffableDataSourceSectionSnapshotを受け入れられるようにしないといけないんじゃないかな。
+ 
+ ・どうやら「Implementing Modern Collection Views」のサンプルコード内で、AppleがUITableViewDiffableDataSourceをカスタムしている例があるらしい。TableViewEditingViewControllerというところでしている
+ */
+
+enum Section {
+    case main
+}
+
+struct Item : Hashable {
+    var id: UUID = .init()
+}
+
+class DataSource: UITableViewDiffableDataSource<Section, Item> { }
+
+/*:
+ ・こんな感じ。これに独自のapplyメソッド頑張って実装すればOutline表示いけそう。これは吉報。
+ 
+ ・またOSSとして作っていこう。さっき作ったやつをDependencyとして持ってきて。
  */
