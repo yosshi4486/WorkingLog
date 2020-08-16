@@ -52,4 +52,8 @@ class DataSource: UITableViewDiffableDataSource<Section, Item> { }
  ・こんな感じ。これに独自のapplyメソッド頑張って実装すればOutline表示いけそう。これは吉報。
  
  ・またOSSとして作っていこう。さっき作ったやつをDependencyとして持ってきて。
+ 
+ ・基本的に、DifferableDataSourceはUITableViewDataSourceに適合して内部で実装を行いつつ、インターフェースとして宣言的なシンタックスを与えるものっぽい。
+ 
+ ・あ！だめだ。NSDiffableDataSourceSectionSnapshotはiOS14からのbetaの型だった。なんらか自作せねば。
  */
