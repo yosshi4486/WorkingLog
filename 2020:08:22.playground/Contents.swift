@@ -33,12 +33,31 @@ final class Node : Hashable {
     
 }
 
-struct Tree {
+struct Tree<ItemIdentifierType> where ItemIdentifierType : Hashable {
     var root = Node()
     
-    func traverse() {
+    func traverse(_ : () -> Void) {
         // 木構造探索の何かしらのアルゴリズム
         // 基本的にルートからトラバースすると、多分木の時間計算量はO(n)になる。
+    }
+    
+    func find(predicate: (ItemIdentifierType) -> Bool) -> ItemIdentifierType? {
+        let result: ItemIdentifierType? = nil
+        traverse {
+            // ここで、見つかったらresultに代入したりする。
+            return
+        }
+        return result
+    }
+    
+    // 木構造をTraverseしているのでO(n)。
+    func level(of itemIdentifier: ItemIdentifierType) -> Int? {
+        let result: Int? = nil
+        find { (item) -> Bool in
+            // ここで条件を指定する。見つかったらresult = node.metaData.levelなどして、trueで返す
+            return true
+        }
+        return result
     }
 }
 
@@ -61,6 +80,9 @@ struct Snapshot<ItemIdentifierType> where ItemIdentifierType : Hashable {
 
 extension Snapshot {
     
+    // Hashtableを利用しているので、O(1)でアクセスできるはず。
+    // https://developer.apple.com/documentation/swift/dictionary/2885650-subscript
+    // SwiftのDictionary.subscriptにはComplexity記載ないけど、記載がないのはO(n)未満の時間計算量の時だけなので。
     func level(of itemIdentifier: ItemIdentifierType) -> Int? {
         return itemTable[itemIdentifier]?.metaData.level
     }
