@@ -8,7 +8,7 @@ import UIKit
  
  ・PlaygroundsのSourcesの下においてもアクセスコントロールをpublicにしないと参照できない。
  
- ・各種アルゴリズムのベンチマークを取ってみる。10000万回検索を回す。10000の理由は、10万だと実行者が長すぎると感るので、検証に相応しい長さが1万ぐらいのため。
+ ・各種アルゴリズムのベンチマークを取ってみる。10000回検索を回す。1000の理由は、10万だと実行者が長すぎると感るし、1000回だとハッキリわかるほど差が出ない。1万だとちょうど良い。各自10, 100倍を脳内で実行してもらいながら見てもらえれば良いかと思う。
  
  ## リニアサーチ
  前提条件: なし
@@ -19,13 +19,13 @@ import UIKit
 
 var dataSource: [Int] = Array<Int>(0...10000)
 
-Benchmark.measure(key: "Linear Search") {
-    
-    for i in 0...10000 {
-        dataSource.firstIndex(of: i)
-    }
+let linearSeach = Benchmark(key: "Linear Seach")
+for i in 0...10000 {
+    assert(dataSource.firstIndex(of: i) == i)
 }
-//: これは、実行環境に依存するが、自分の環境だと7~8秒ぐらいかかる。
+linearSeach.finish()
+
+//: 実行環境に依存するが、自分の環境だと7~8秒ぐらいかかる。
 
 /*:
   ## 二分探索(バイナリサーチ)
@@ -63,3 +63,35 @@ Benchmark.measure(key: "Linear Search") {
  となる。
  
  */
+
+extension Collection where Element == Int, Index == Int {
+    
+    func binarySearchfirstIndex(of element: Int) -> Int? {
+        var low = 0
+        var high = count - 1
+        var mid: Int = 0
+        
+        while low <= high {
+            mid = (low + high) / 2
+            
+            if element == self[mid] {
+                return mid
+            } else if element > self[mid] {
+                low = mid + 1
+            } else {
+                high = mid - 1
+            }
+        }
+        
+        return nil
+    }
+    
+}
+
+let binarySearch = Benchmark(key: "Binary Search")
+for i in 0...10000 {
+    assert(dataSource.binarySearchfirstIndex(of: i) == i)
+}
+binarySearch.finish()
+
+//: 実行環境に依存するが、自分の環境だと4秒ぐらいかかる。

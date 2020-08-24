@@ -8,13 +8,13 @@ public struct Benchmark {
     var key: String
     
     // 処理開始
-    init(key: String) {
+    public init(key: String) {
         self.startTime = Date()
         self.key = key
     }
     
     // 処理終了
-    func finish() {
+    public func finish() {
         let elapsed = Date().timeIntervalSince(startTime) as Double
         let formatedElapsed = String(format: "%.3f", elapsed)
         print("Benchmark: \(key), Elasped time: \(formatedElapsed)(s)")
