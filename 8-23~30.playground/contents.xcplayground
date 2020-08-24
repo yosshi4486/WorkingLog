@@ -7,5 +7,6 @@
         <page name='BinarySearch'/>
         <page name='BubbleSort'/>
         <page name='SelectionSort'/>
+        <page name='InserationSort'/>
     </pages>
 </playground>
