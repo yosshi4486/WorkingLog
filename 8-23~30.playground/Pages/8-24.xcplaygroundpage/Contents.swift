@@ -12,6 +12,15 @@ import UIKit
  
  ・Playgroundが部分実行できないのでページごとに分割してみた。ページ内に子ページを設けたい...。
  
+ ・どうやらUIImageを使って表示していた画像、普通にマークダウンで表示できたっぽい。
+ https://developer.apple.com/library/archive/documentation/Xcode/Reference/xcode_markup_formatting_ref/Images.html#//apple_ref/doc/uid/TP40016497-CH17-SW1
+ 
+ ・試しにやってみる。
+ 
+ ![サンプル画像](NewPlaygroundPage.png)
+ 
+ ・できた。動画もいけるっぽい。
+ 
  ## 検索アルゴリズム
  - [Linear Seach](LinearSearch)
  - [Binary Seach](BinarySearch)
