@@ -12,7 +12,11 @@ import UIKit
  
  ・Playgroundが部分実行できないのでページごとに分割してみた。ページ内に子ページを設けたい...。
  
+ ## 検索アルゴリズム
  - [Linear Seach](LinearSearch)
  - [Binary Seach](BinarySearch)
+ 
+ ## ソートアルゴリズム
+ - [Bubble Sort](BubbleSort)
  
 */

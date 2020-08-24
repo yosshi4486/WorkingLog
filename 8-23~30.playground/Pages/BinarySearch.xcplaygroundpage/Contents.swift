@@ -65,11 +65,11 @@ extension Collection where Element == Int, Index == Int {
    
 }
 
-let binarySearch = Benchmark(key: "Binary Search")
-for i in 0...10000 {
-   assert(dataSource.binarySearchfirstIndex(of: i) == i)
+Benchmark.measure(key: "Binary Search") {
+    for i in 0...10000 {
+       assert(dataSource.binarySearchfirstIndex(of: i) == i)
+    }
 }
-binarySearch.finish()
 
 //: 実行環境に依存するが、自分の環境だと4秒ぐらいかかる。
 
