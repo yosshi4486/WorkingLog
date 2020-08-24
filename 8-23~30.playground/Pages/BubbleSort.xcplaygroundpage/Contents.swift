@@ -23,7 +23,7 @@ dataSource[0...5]
 
 extension MutableCollection where Element : Comparable, Index == Int {
     
-    mutating func bubbleSort(desending: Bool = true) {
+    mutating func bubbleSort() {
         for outerRoopIndex in 0..<self.count-1 {
             for innerRoopIndex in (outerRoopIndex...self.count-1).reversed().dropLast() {
                 if self[innerRoopIndex] < self[innerRoopIndex-1] {

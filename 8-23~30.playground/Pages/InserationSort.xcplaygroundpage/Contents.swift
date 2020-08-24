@@ -25,13 +25,10 @@ dataSource.shuffle()
 
 extension MutableCollection where Element : Comparable, Index == Int {
     
-    mutating func inserationSort(desending: Bool = true) {
+    mutating func inserationSort() {
         for i in 1..<count {
-            var j = i
-            
-            while j > 0 && self[j] < self[j-1] {
+            for j in stride(from: i, through: 1, by: -1) where self[j] < self[j-1] {
                 swapAt(j-1, j)
-                j -= 1
             }
         }
     }
@@ -42,6 +39,30 @@ Benchmark.measure(key: "Inseration Sort") {
     dataSource.inserationSort()
 }
 
+print(dataSource)
+
 assert(dataSource == Array<Int>(0...numberOfItems))
 
+/*:
+ ## Strideの挙動
+ */
+print("------------------------------------")
+for i in stride(from: 0, to: 100, by: 5) {
+    print("from:to:by, upward, index:\(i)")
+}
+print("------------------------------------")
+for i in stride(from: 0, through: 100, by: 5) {
+    print("from:through:by, upward, index:\(i)")
+}
+print("------------------------------------")
+for i in stride(from: 100, to: 0, by: -5) {
+    print("from:to:by, downward, index:\(i)")
+}
+print("------------------------------------")
+for i in stride(from: 100, through: 0, by: -5) {
+    print("from:through:by, downward, index:\(i)")
+}
+print("------------------------------------")
+
+//: toはその要素を含まない。UpwardをRange記法すると0..<100、throughはその要素を含むのでRange記法だと0...100に相当する。
 //: [Next](@next)

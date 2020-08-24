@@ -81,6 +81,10 @@ import UIKit
  
  この動画がひっじょうにわかりやすい。やっぱり動きが見えると理解が大変助かる分野あるなぁ。ありがとう。
  
+ ・https://www.youtube.com/watch?time_continue=47&v=CmPA7zE8mx0&feature=emb_logo
+ このフォークダンス踊りながらソート教えてくれるの、本当にすごい分かりやすい。
+ 
+ 
  ## 検索アルゴリズム
  - [Linear Seach](LinearSearch)
  - [Binary Seach](BinarySearch)
@@ -89,4 +93,5 @@ import UIKit
  - [Bubble Sort](BubbleSort)
  - [Selection Sort](SelectionSort)
  - [Inseration Sort](InserationSort)
+ - [Shell Sort](ShellSort)
 */

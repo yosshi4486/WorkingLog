@@ -23,7 +23,7 @@ dataSource[0...5]
 
 extension MutableCollection where Element : Comparable, Index == Int {
     
-    mutating func selectionSort(desending: Bool = true) {
+    mutating func selectionSort() {
         for outerRoopIndex in 0..<self.count-1 {
             var min = outerRoopIndex
             for innerRoopIndex in (outerRoopIndex..<self.count) {
