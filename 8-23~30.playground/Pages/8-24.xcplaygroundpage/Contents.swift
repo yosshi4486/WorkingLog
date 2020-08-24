@@ -77,6 +77,10 @@ import UIKit
  
  ・ソートアルゴリズム学ぶときに、手元にブロックかなんかあったら便利やな。
  
+ ・https://www.youtube.com/watch?v=z0YcQIqyV5Q
+ 
+ この動画がひっじょうにわかりやすい。やっぱり動きが見えると理解が大変助かる分野あるなぁ。ありがとう。
+ 
  ## 検索アルゴリズム
  - [Linear Seach](LinearSearch)
  - [Binary Seach](BinarySearch)
