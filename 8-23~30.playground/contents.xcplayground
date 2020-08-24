@@ -6,5 +6,6 @@
         <page name='LinearSearch'/>
         <page name='BinarySearch'/>
         <page name='BubbleSort'/>
+        <page name='SelectionSort'/>
     </pages>
 </playground>

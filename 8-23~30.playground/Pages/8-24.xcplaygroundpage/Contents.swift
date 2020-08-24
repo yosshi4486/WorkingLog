@@ -27,5 +27,6 @@ import UIKit
  
  ## ソートアルゴリズム
  - [Bubble Sort](BubbleSort)
+ - [Selection Sort](SelectionSort)
  
 */
