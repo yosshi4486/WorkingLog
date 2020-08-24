@@ -8,6 +8,7 @@ import Foundation
 方法: 配列の最小値(最大値)を持つ要素を、配列の先頭と交換することでソートを行うアルゴリズム
 時間計算量: O(n^2)
 
+ バブルソートは、隣あう数字の大小によって交換を平均n/2回行うが、選択ソートは一回の走査で一度しか交換を行わない。
 */
 
 //: ここを任意の数値に置き換えて実行してください。
@@ -24,11 +25,13 @@ extension MutableCollection where Element : Comparable, Index == Int {
     
     mutating func selectionSort(desending: Bool = true) {
         for outerRoopIndex in 0..<self.count-1 {
-            for innerRoopIndex in (outerRoopIndex+1..<self.count) {
-                if self[innerRoopIndex] < self[outerRoopIndex] {
-                    swapAt(innerRoopIndex, outerRoopIndex)
+            var min = outerRoopIndex
+            for innerRoopIndex in (outerRoopIndex..<self.count) {
+                if self[innerRoopIndex] < self[min] {
+                    min = innerRoopIndex
                 }
             }
+            swapAt(outerRoopIndex, min)
         }
     }
     
