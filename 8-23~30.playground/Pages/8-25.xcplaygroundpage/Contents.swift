@@ -43,6 +43,7 @@ decoupledRight[3]
  
  https://medium.com/@yasufumy/data-structure-heap-ecfd0989e5be
  
+ ・バケツソートは取りうる値の最大値がそこそこの時は、時間計算量はクイックソートより速い。
  
  ## ソートアルゴリズム(続)
  - [Quick Sort](QuickSort)
