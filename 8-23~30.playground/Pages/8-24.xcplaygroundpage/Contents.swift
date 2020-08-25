@@ -84,7 +84,6 @@ import UIKit
  ・https://www.youtube.com/watch?time_continue=47&v=CmPA7zE8mx0&feature=emb_logo
  このフォークダンス踊りながらソート教えてくれるの、本当にすごい分かりやすい。
  
- 
  ## 検索アルゴリズム
  - [Linear Seach](LinearSearch)
  - [Binary Seach](BinarySearch)

@@ -24,7 +24,7 @@ dataSource.shuffle()
 
 extension MutableCollection where Element : Comparable, Index == Int {
     
-    mutating func shellSort(desending: Bool = true) {
+    mutating func shellSort() {
         var sortStride = count / 2
         
         while sortStride > 0 {
