@@ -17,6 +17,13 @@
  ・「安定ソート」は、値が等しいなデータの順序が、ソート後も保たれること。「内部ソート」はメモリ内の配列などが対象のソートのこと、「外部ソート」は外部記憶装置に保存された情報が対象のソートのこと。
  
  ・クイックソートまーじで早え
+ 
+ ## ソートアルゴリズム(続)
+ - [Quick Sort](QuickSort)
+ - [Marge Sort](MargeSort)
+ - [Heap Sort](HeapSort)
+ - [Backet Sort](BacketSort)
+ - [Counting Sort](CountingSort)
  */
 
 //: [Next](@next)

@@ -11,5 +11,6 @@
         <page name='ShellSort'/>
         <page name='8-25'/>
         <page name='QuickSort'/>
+        <page name='MargeSort'/>
     </pages>
 </playground>
