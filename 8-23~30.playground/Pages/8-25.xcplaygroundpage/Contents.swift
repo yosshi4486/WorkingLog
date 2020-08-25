@@ -39,6 +39,11 @@ decoupledRight[3]
 //: を実行しないといけない。Arrayを量産してパフォーマンス下げたくないからArraySlice使ってみるか。と思ったらこの仕様知らなくてドツボにハマった。勉強勉強
 /*:
  
+ ・スタックが、追加される要素に対して最高の優先度が設定される優先度付きキューと考えられるし、キューは追加されるたびに前の要素より優先度が下がると考えると、どちらも優先度付きキューの一種として捉えられるという考え方は新しい。(自分に取って
+ 
+ https://medium.com/@yasufumy/data-structure-heap-ecfd0989e5be
+ 
+ 
  ## ソートアルゴリズム(続)
  - [Quick Sort](QuickSort)
  - [Marge Sort](MargeSort)

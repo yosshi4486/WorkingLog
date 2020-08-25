@@ -80,9 +80,8 @@ Benchmark.measure(key: "Marge Sort") {
     dataSource.margeSort()
 }
 
-dataSource
-
-assert(dataSource == Array<Int>(0...numberOfItems))
+import XCTest
+XCTAssertEqual(dataSource, Array<Int>(0...numberOfItems))
 
 /*:
  ## ベンチマーク

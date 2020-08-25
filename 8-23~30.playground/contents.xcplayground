@@ -12,5 +12,6 @@
         <page name='8-25'/>
         <page name='QuickSort'/>
         <page name='MargeSort'/>
+        <page name='HeapSort'/>
     </pages>
 </playground>
