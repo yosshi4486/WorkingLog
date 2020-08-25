@@ -62,7 +62,7 @@ extension Array where Element == Int {
     
 }
 
-Benchmark.measure(key: "Inseration Sort") {
+Benchmark.measure(key: "Quick Sort") {
     dataSource.quickSort()
 }
 

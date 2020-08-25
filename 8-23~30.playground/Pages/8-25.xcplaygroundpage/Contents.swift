@@ -18,6 +18,27 @@
  
  ・クイックソートまーじで早え
  
+ ・コンセプト→仕様→実装の3点を掴む
+ 
+ ・ArraySliceの挙動をやっとうまく掴んだ。ちょっと試す
+ */
+
+let arraySlice: ArraySlice<String> = .init(["a", "b", "c", "d", "e", "f"])
+let decoupledLeft = arraySlice[0...2]
+let decoupledRight = arraySlice[3...]
+
+//: ここで分割される。Arrayの場合は、left、rightがそれぞれ0からインデックスが振りなおされて別々のものとして扱えるので、dが欲しければ
+
+// decoupledRight[0]
+
+//: と記述したくなるが、ArraySliceではIndex out of boundsが発生する。これはArraySliceが、その名の通りArrayをスライスしているだけで、新規のArrayを作っているわけではなくストレージ共有しているので、このような挙動になる。
+//: つまりdにアクセスしたければ
+
+decoupledRight[3]
+
+//: を実行しないといけない。Arrayを量産してパフォーマンス下げたくないからArraySlice使ってみるか。と思ったらこの仕様知らなくてドツボにハマった。勉強勉強
+/*:
+ 
  ## ソートアルゴリズム(続)
  - [Quick Sort](QuickSort)
  - [Marge Sort](MargeSort)

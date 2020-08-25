@@ -47,7 +47,7 @@ extension MutableCollection where Element : Comparable, Index == Int {
     
 }
 
-Benchmark.measure(key: "Inseration Sort") {
+Benchmark.measure(key: "Shell Sort") {
     dataSource.shellSort()
 }
 
