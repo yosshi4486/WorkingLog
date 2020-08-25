@@ -13,5 +13,7 @@
         <page name='QuickSort'/>
         <page name='MargeSort'/>
         <page name='HeapSort'/>
+        <page name='BucketSort'/>
+        <page name='CountingSort'/>
     </pages>
 </playground>
