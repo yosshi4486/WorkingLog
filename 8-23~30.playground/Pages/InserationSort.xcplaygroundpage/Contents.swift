@@ -7,7 +7,7 @@ import Foundation
 リンク: https://www.codereading.com/algo_and_ds/algo/insertion_sort.html
 前提条件: 整列済みリスト
 方法: 新しい要素を適切な位置に挿入することで整列を行う
-時間計算量: O(n^2)
+時間計算量: worth O(n^2), best O(n), average O(n^2)
 使い所:
  
  >　整列済みのリストの後ろにいくつかの要素を追加して再び整列させるという場合や、一方の整列済みリストに整列されていない他方のリストを追加しながら整列させたい時に威力を発揮します。
