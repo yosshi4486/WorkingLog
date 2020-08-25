@@ -35,26 +35,26 @@ extension Array where Element == Int {
             let pivot = list[0]
             
             // 3. ピボット要素を中心とした大小のリストに分割する。
-            var lessThanOrEqualToPivot: [Element] = []
-            var greaterThanPivot: [Element] = []
+            var elementsThatAreLessThanOrEqualToPivot: [Element] = []
+            var elementsThatAreGreaterThanPivot: [Element] = []
             
             // 4.今はピボットとして先頭要素を選択しているので、それを分割したリストに入れないように注意して1..<list.countで進める
             // ピボットとして中央値を選択するような場合は、それを走査の対象に含めないように。
             for i in 1..<list.count {
                 if list[i] <= pivot {
-                    lessThanOrEqualToPivot.append(list[i])
+                    elementsThatAreLessThanOrEqualToPivot.append(list[i])
                 } else {
-                    greaterThanPivot.append(list[i])
+                    elementsThatAreGreaterThanPivot.append(list[i])
                 }
             }
             
             // 5. 再帰的にこの操作を繰り返していくことで、ソート済みの配列が得られる。
-            lessThanOrEqualToPivot = sort(lessThanOrEqualToPivot)
-            greaterThanPivot = sort(greaterThanPivot)
+            elementsThatAreLessThanOrEqualToPivot = sort(elementsThatAreLessThanOrEqualToPivot)
+            elementsThatAreGreaterThanPivot = sort(elementsThatAreGreaterThanPivot)
 //            print("left: \(lessThanOrEqualToPivot)")
 //            print("pivot: \(pivot)")
 //            print("right: \(greaterThanPivot)")
-            return lessThanOrEqualToPivot + [pivot] + greaterThanPivot
+            return elementsThatAreLessThanOrEqualToPivot + [pivot] + elementsThatAreGreaterThanPivot
         }
         
         self = sort(self)
