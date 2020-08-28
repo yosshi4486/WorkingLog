@@ -8,7 +8,8 @@
  各ノードが子を2つまでしか持たない、かつ、全ての要素が「左<親<=右」もしくは「左<=親<右」を満たす木構造
  
  ## 特徴
- 二分探索が可能な構造になっているので、平衡なら各操作がO(log n)
+ 二分探索が可能な構造になっているので、平衡なら＝各操作がO(log n)
+
  
  ## 仕様
  */
@@ -49,41 +50,41 @@ protocol Tree {
  */
 
 /// Comparableにしているので、StringでもIntでも、比較可能なものなら扱える。
-final class BinaryTreeNode<Element> : Node where Element : Comparable {
+final class BinarySearchTreeNode<Element> : Node where Element : Comparable {
     
     var element: Element
     
-    var parent: BinaryTreeNode?
+    var parent: BinarySearchTreeNode?
 
-    var left: BinaryTreeNode?
+    var left: BinarySearchTreeNode?
     
-    var right: BinaryTreeNode?
+    var right: BinarySearchTreeNode?
     
-    init(element: Element, parent: BinaryTreeNode?, left: BinaryTreeNode?, right: BinaryTreeNode?) {
+    init(element: Element, parent: BinarySearchTreeNode?, left: BinarySearchTreeNode?, right: BinarySearchTreeNode?) {
         self.element = element
         self.parent = parent
         self.left = left
         self.right = right
     }
     
-    static func < (lhs: BinaryTreeNode, rhs: BinaryTreeNode) -> Bool {
+    static func < (lhs: BinarySearchTreeNode, rhs: BinarySearchTreeNode) -> Bool {
         return lhs.element < rhs.element
     }
     
-    static func == (lhs: BinaryTreeNode, rhs: BinaryTreeNode) -> Bool {
+    static func == (lhs: BinarySearchTreeNode, rhs: BinarySearchTreeNode) -> Bool {
         return lhs.element == rhs.element
     }
     
 }
 
-/// ルートノードの初期化によってElementが束縛される
+/// 初期化でElementが束縛される。
 final class BinarySearchTree<Element> : Tree where Element : Comparable {
 
-    typealias TreeNode = BinaryTreeNode<Element>
+    typealias TreeNode = BinarySearchTreeNode<Element>
 
     var root: TreeNode
     
-    func find(element: Element) -> BinaryTreeNode<Element>? {
+    func find(element: Element) -> BinarySearchTreeNode<Element>? {
         var node: TreeNode? = root
         
         while node != nil {
@@ -116,7 +117,7 @@ final class BinarySearchTree<Element> : Tree where Element : Comparable {
             return print("Not found")
         }
         
-        node = BinaryTreeNode<Element>(element: element, parent: foundParentNode, left: nil, right: nil)
+        node = BinarySearchTreeNode<Element>(element: element, parent: foundParentNode, left: nil, right: nil)
         
         if element < foundParentNode.element {
             foundParentNode.left = node
@@ -177,4 +178,8 @@ func testTree() {
 }
 testTree()
 
+/*:
+ (ついでに)二分木
+ 概念: 二分探索木は親、右、左の間に
+ */
 //: [Next](@next)

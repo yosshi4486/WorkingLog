@@ -6,5 +6,20 @@
  
  ・月曜日からUIの実装開始できるのを目安に。パフォーマンスに問題は覚えつつも、とりあえずの実装はできたので、月曜までに解決しなかったらそのまま進めつつ、理解した時点で改善する。
 
+ ・二分木はノードを最大2つまで持てる木構造
  */
+
+// マークダウンの画像は、元画像のサイズを調整しないといけないので、コードで調整できる方を選択
+import UIKit
+UIImage(named: "BinaryTree")
+
+//: [全二分木](BinaryTree.png)は全てのノードが2つ子を持っている木構造。
+UIImage(named: "FullBinaryTree.png")
+
+ //: 完全二分木は、全二分木を満たしつつ、全てのリーフが同じ高さの木構造。
+UIImage(named: "PerfectBinaryTree.png")
+ 
+ //: 集合関係はこのようになる
+UIImage(named: "Set.png")
+
 //: [Next](@next)
