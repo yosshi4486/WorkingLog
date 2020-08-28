@@ -18,5 +18,6 @@
         <page name='8-26'/>
         <page name='8-28'/>
         <page name='BinarySearchTree'/>
+        <page name='BinaryBalancedTree'/>
     </pages>
 </playground>
