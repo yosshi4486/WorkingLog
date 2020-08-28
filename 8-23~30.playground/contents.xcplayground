@@ -15,5 +15,7 @@
         <page name='HeapSort'/>
         <page name='BucketSort'/>
         <page name='CountingSort'/>
+        <page name='8-26'/>
+        <page name='8-28'/>
     </pages>
 </playground>
