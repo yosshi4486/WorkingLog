@@ -14,8 +14,8 @@
  ## 仕様
  */
 
-protocol Node : Comparable {
-    associatedtype Element : Comparable
+protocol Node {
+    associatedtype Element
     
     /// 親を保持していると「検索対象と一致したノードが見つかったら、親から〇〇する」という処理を実行しやすくて便利
     var parent: Self? { get set }
@@ -155,7 +155,7 @@ final class BinarySearchTree<Element> : Tree where Element : Comparable {
 import XCTest
 
 func testTree() {
-    let root = BinaryTreeNode(element: "d", parent: nil, left: nil, right: nil)
+    let root = BinarySearchTreeNode(element: "d", parent: nil, left: nil, right: nil)
     let tree = BinarySearchTree(root: root)
     
     tree.insert(element: "b")
@@ -180,6 +180,56 @@ testTree()
 
 /*:
  (ついでに)二分木
- 概念: 二分探索木は親、右、左の間に
  */
+
+// ただの2分木には探索用の条件が存在しないのでComprableである必要がない。要素が==で結べれば良いのでEquatable
+final class BinaryTreeNode<Element> : Node, Equatable where Element : Equatable {
+    
+    typealias TreeNode = BinaryTreeNode<Element>
+    var element: Element
+    
+    var parent: TreeNode?
+    
+    var left: TreeNode?
+    
+    var right: TreeNode?
+    
+    static func == (lhs: TreeNode, rhs: TreeNode) -> Bool {
+        return lhs.element == rhs.element
+    }
+    
+    init(element: Element, parent: TreeNode?, left: TreeNode?, right: TreeNode?) {
+        self.element = element
+        self.parent = parent
+        self.left = left
+        self.right = right
+    }
+    
+}
+
+final class BinaryTree<Element> : Tree where Element : Equatable {
+    typealias TreeNode = BinaryTreeNode<Element>
+
+    var root: BinaryTreeNode<Element>
+    
+    func find(element: Element) -> BinaryTreeNode<Element>? {
+        // 深さ優先探索O(n)を実行して、発見したら返す
+        //
+        return nil
+    }
+    
+    func insert(element: Element) {
+        // 2分木の挿入位置は実装による
+    }
+    
+    func remove(element: Element) {
+        // 深さ優先探索O(n)を実行して、発見したら削除する
+    }
+    
+    init(root: TreeNode) {
+        self.root = root
+    }
+    
+}
+
 //: [Next](@next)

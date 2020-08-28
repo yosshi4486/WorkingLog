@@ -22,4 +22,8 @@ UIImage(named: "PerfectBinaryTree.png")
  //: 集合関係はこのようになる
 UIImage(named: "Set.png")
 
+/*:
+ ・日、週、月、年単位で振り返りできるように練習していこう。
+ 
+ */
 //: [Next](@next)
