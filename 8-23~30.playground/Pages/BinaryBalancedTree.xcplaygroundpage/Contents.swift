@@ -218,9 +218,6 @@ final class AVLTree<Element> : BalancedBinarySearchTree where Element : Comparab
          [1]: 平衡条件を満たさないノードをPとして、Pの左部分木の方が高く、かつPの左の子ノードの右部分木の方が高い場合
          [2]: 平衡条件を満たさないノードをPとして、Pの右部分木の方が高く、かつPの右の子ノードの左部分木の方が高い場合
          
-         この2つの条件を考えるのに、今回の実装では関数によって挿入した要素の値の比較を利用している。
-         「Pの左の部分木が高くなっているのに、新しく挿入した要素がPの左の子ノードの要素より大きい(=子ノードの右側が高くなっている)」
-         ということ
          */
         
         if let rotation = Rotation(balance: aBalance, node: aNode) {
@@ -285,9 +282,6 @@ final class AVLTree<Element> : BalancedBinarySearchTree where Element : Comparab
          [1]: 平衡条件を満たさないノードをPとして、Pの左部分木の方が高く、かつPの左の子ノードの右部分木の方が高い場合
          [2]: 平衡条件を満たさないノードをPとして、Pの右部分木の方が高く、かつPの右の子ノードの左部分木の方が高い場合
          
-         この2つの条件を考えるのに、今回の実装では関数によって挿入した要素の値の比較を利用している。
-         「Pの左の部分木が高くなっているのに、新しく挿入した要素がPの左の子ノードの要素より大きい(=子ノードの右側が高くなっている)」
-         ということ
          */
         
         if let rotation = Rotation(balance: aBalance, node: aNode) {
