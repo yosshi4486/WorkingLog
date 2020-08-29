@@ -114,6 +114,36 @@ final class AVLTree<Element> : BalancedBinarySearchTree where Element : Comparab
 
     typealias TreeNode = AVLTreeNode<Element>
 
+    enum Rotation {
+        case singleR
+        case singleL
+        case doubleLR
+        case doubleRL
+        
+        init?(balance: Int, node: TreeNode) {
+            
+            func height(of node: TreeNode?) -> Int {
+                guard let aNode = node else {
+                    return 0
+                }
+                return aNode.height
+            }
+
+            if balance > 1 && height(of: node.left?.left) > height(of: node.left?.right) {
+                self = .singleR
+            } else if balance < -1 && height(of: node.right?.right) > height(of: node.right?.left) {
+                self = .singleL
+            } else if balance > 1 && height(of: node.left?.left) < height(of: node.left?.right) {
+                self = .doubleLR
+            } else if balance < 1 && height(of: node.right?.right) < height(of: node.right?.left) {
+                self = .doubleRL
+            } else {
+                return nil
+            }
+        }
+
+    }
+
     var root: TreeNode
     
     /// あるノードの高さをえる
@@ -124,6 +154,10 @@ final class AVLTree<Element> : BalancedBinarySearchTree where Element : Comparab
         return aNode.height
     }
     
+    var isBalanced: Bool {
+        let aBalance = balance(of: root)
+        return -1 < aBalance && aBalance < 1
+    }
     /// ノードの平衡係数を返す
     func balance(of node: TreeNode?) -> Int {
         guard let aNode = node else {
@@ -150,21 +184,24 @@ final class AVLTree<Element> : BalancedBinarySearchTree where Element : Comparab
         return node
     }
     
-    func insert(node: TreeNode?, element: Element) -> TreeNode? {
+    private func insert(node: TreeNode?, element: Element) -> TreeNode? {
         // 1. 普通にBSTの挿入操作をする
         guard let aNode = node else {
             return TreeNode(element: element, height: 1, parent: nil, left: nil, right: nil)
         }
         
         if element < aNode.element {
+            // 左が空の場合は、空のノードがinsertに渡されて上のguard文からreturnされる。
             aNode.left = insert(node: aNode.left, element: element)
         } else if element > aNode.element {
+            // 右が空の場合は、空のノードがinsertに渡されて上のguard文からreturnされる。
             aNode.right = insert(node: node?.right, element: element)
         } else {
             return aNode
         }
         
         // 2. 高さの更新をする
+        // リーフ直前のノードから始まって、左右の高さより自分が+1高いところにいる。
         aNode.height = 1 + max(height(of: aNode.left), height(of: aNode.right))
         
         // 3. 平衡係数を取る
@@ -184,32 +221,98 @@ final class AVLTree<Element> : BalancedBinarySearchTree where Element : Comparab
          この2つの条件を考えるのに、今回の実装では関数によって挿入した要素の値の比較を利用している。
          「Pの左の部分木が高くなっているのに、新しく挿入した要素がPの左の子ノードの要素より大きい(=子ノードの右側が高くなっている)」
          ということ
-         
          */
         
-        if let childLeft = aNode.left, aBalance > 1 && element < childLeft.element {
-            return rotateRight(node: aNode)
-        } else if let childrRight = aNode.right, aBalance < -1 && element > childrRight.element {
-            return rotateLeft(node: aNode)
-        } else if let childLeft = aNode.left, aBalance > 1 && element > childLeft.element {
-            aNode.left = rotateLeft(node: childLeft)
-            return rotateRight(node: aNode)
-        } else if let childRight = aNode.right, aBalance < -1 && element < childRight.element {
-            aNode.right = rotateRight(node: childRight)
-            return rotateLeft(node: aNode)
+        if let rotation = Rotation(balance: aBalance, node: aNode) {
+            switch rotation {
+            case .singleR:
+                return rotateRight(node: aNode)
+            case .singleL:
+                return rotateLeft(node: aNode)
+            case .doubleLR:
+                aNode.left = rotateLeft(node: aNode.left!)
+                return rotateRight(node: aNode)
+            case .doubleRL:
+                aNode.right = rotateRight(node: aNode.right!)
+                return rotateLeft(node: aNode)
+            }
+        }
+                
+        return aNode
+    }
+    
+    // 挿入時には平衡係数を調べて、条件を満たしていれば木の回転を行う
+    func insert(element: Element) {
+        guard let inserted = insert(node: root, element: element) else {
+            return
+        }
+        
+        root = inserted
+    }
+    
+    private func remove(node: TreeNode?, element: Element) -> TreeNode? {
+        // 1. 普通にBSTの削除操作をする
+        guard let aNode = node else {
+            return nil
+        }
+        
+        if element < aNode.element {
+            // 左が空の場合は、空のノードがinsertに渡されて上のguard文からreturnされる。
+            aNode.left = remove(node: aNode.left, element: element)
+        } else if element > aNode.element {
+            // 右が空の場合は、空のノードがinsertに渡されて上のguard文からreturnされる。
+            aNode.right = remove(node: node?.right, element: element)
+        } else {
+            // 一致した要素をnilにする。
+            return nil
+        }
+        
+        // 2. 高さの更新をする
+        // リーフ直前のノードから始まって、左右の高さより自分が+1高いところにいる。
+        aNode.height = 1 + max(height(of: aNode.left), height(of: aNode.right))
+        
+        // 3. 平衡係数を取る
+        let aBalance = balance(of: aNode)
+        
+        /*
+         5. 経路を辿りながら、平衡係数を見て必要なら回転操作を掛けていくが、以下の4パターンがある。
+         1) 左単一回転
+         2) 右単一回転
+         3) 左右二重回転
+         4) 右左二重回転
+         
+         単回転では平衡条件が満たされないパターンが2つあり、それが3と4に該当する。
+         [1]: 平衡条件を満たさないノードをPとして、Pの左部分木の方が高く、かつPの左の子ノードの右部分木の方が高い場合
+         [2]: 平衡条件を満たさないノードをPとして、Pの右部分木の方が高く、かつPの右の子ノードの左部分木の方が高い場合
+         
+         この2つの条件を考えるのに、今回の実装では関数によって挿入した要素の値の比較を利用している。
+         「Pの左の部分木が高くなっているのに、新しく挿入した要素がPの左の子ノードの要素より大きい(=子ノードの右側が高くなっている)」
+         ということ
+         */
+        
+        if let rotation = Rotation(balance: aBalance, node: aNode) {
+            switch rotation {
+            case .singleR:
+                return rotateRight(node: aNode)
+            case .singleL:
+                return rotateLeft(node: aNode)
+            case .doubleLR:
+                aNode.left = rotateLeft(node: aNode.left!)
+                return rotateRight(node: aNode)
+            case .doubleRL:
+                aNode.right = rotateRight(node: aNode.right!)
+                return rotateLeft(node: aNode)
+            }
         }
         
         return aNode
     }
-
-    
-    // 挿入時には平衡係数を調べて、条件を満たしていれば木の回転を行う
-    func insert(element: Element) {
-        fatalError("実装の参照先を変えたら、whileから再帰の実装になったのでこちらは使わず")
-    }
     
     func remove(element: Element) {
-        fatalError("疲れたので割愛")
+        guard let removed = remove(node: root, element: element) else {
+            return
+        }
+        self.root = removed
     }
     
     func rotateLeft(node: AVLTreeNode<Element>) -> AVLTreeNode<Element>? {
@@ -303,16 +406,18 @@ final class AVLTree<Element> : BalancedBinarySearchTree where Element : Comparab
     }
 }
 
+//: ## テストコード
+
 import XCTest
 
-func testTree() {
+func testInsert() {
     let tree = AVLTree(root: AVLTreeNode(element: 10, height: 1, parent: nil, left: nil, right: nil))
-    tree.root = tree.insert(node: tree.root, element: 20)!
-    tree.root = tree.insert(node: tree.root, element: 30)!
-    tree.root = tree.insert(node: tree.root, element: 40)!
-    tree.root = tree.insert(node: tree.root, element: 50)!
-    tree.root = tree.insert(node: tree.root, element: 25)!
-    
+    tree.insert(element: 20)
+    tree.insert(element: 30)
+    tree.insert(element: 40)
+    tree.insert(element: 50)
+    tree.insert(element: 25)
+
     XCTAssertEqual(tree.balance(of: tree.root), 0)
     
     print("Preorder traversal")
@@ -325,4 +430,61 @@ func testTree() {
     XCTAssertEqual(result[5], 50)
 }
 
-testTree()
+func testFind() {
+    let tree = AVLTree(root: AVLTreeNode(element: 10, height: 1, parent: nil, left: nil, right: nil))
+    tree.insert(element: 20)
+    tree.insert(element: 30)
+    tree.insert(element: 40)
+    tree.insert(element: 50)
+    tree.insert(element: 25)
+
+    XCTAssertEqual(tree.balance(of: tree.root), 0)
+    
+    print("Preorder traversal")
+    let result = tree.traverse()
+    XCTAssertEqual(result[0], 30)
+    XCTAssertEqual(result[1], 20)
+    XCTAssertEqual(result[2], 10)
+    XCTAssertEqual(result[3], 25)
+    XCTAssertEqual(result[4], 40)
+    XCTAssertEqual(result[5], 50)
+    
+    XCTAssertNil(tree.find(element: 80))
+    XCTAssertEqual(tree.find(element: 40)?.element, 40)
+}
+
+
+func testRemove() {
+    let tree = AVLTree(root: AVLTreeNode(element: 10, height: 1, parent: nil, left: nil, right: nil))
+    tree.insert(element: 20)
+    tree.insert(element: 30)
+    tree.insert(element: 40)
+    tree.insert(element: 50)
+    tree.insert(element: 25)
+
+    XCTAssertTrue(tree.isBalanced)
+    
+    print("Preorder traversal")
+    let inserationResult = tree.traverse()
+    XCTAssertEqual(inserationResult[0], 30)
+    XCTAssertEqual(inserationResult[1], 20)
+    XCTAssertEqual(inserationResult[2], 10)
+    XCTAssertEqual(inserationResult[3], 25)
+    XCTAssertEqual(inserationResult[4], 40)
+    XCTAssertEqual(inserationResult[5], 50)
+    
+    tree.remove(element: 40)
+    
+    let removedResult = tree.traverse()
+    XCTAssertEqual(removedResult.count, 4)
+    XCTAssertEqual(inserationResult[0], 30)
+    XCTAssertEqual(inserationResult[1], 20)
+    XCTAssertEqual(inserationResult[2], 10)
+    XCTAssertEqual(inserationResult[3], 25)
+    
+}
+
+testInsert()
+testRemove()
+testInsert()
+
