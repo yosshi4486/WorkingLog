@@ -28,6 +28,10 @@ func testInsert() {
 
 /*:
  ・ベンチマークを取ると、準線型時間の処理よりも早く、線型時間の処理より重いくらいなので、O(n)だけど次数や係数を飛ばさずに厳密に計算するとステップ数はnより多い(10nとか)感じなんかな。
+ ・自分が取り組んでいる問題は、「Order-maintenance problem」というものではないか...?https://en.wikipedia.org/wiki/Order-maintenance_problem
+ ・iPhoneではリフレッシュレート60Hzに合わせて、60FPSを維持できるくらい、iPadでは120FPSを維持できる、ヌルヌルするUIのパフォーマンスを維持する。
+ ・https://ja.stackoverflow.com/questions/70187/outlineビューを実現したいが-木構造を一次元のリストで表現できるような構造の名前を知りたい
+ ・
  */
 
 //: [Next](@next)
